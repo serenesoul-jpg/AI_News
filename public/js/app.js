@@ -171,6 +171,22 @@
       });
   }
 
+  function todayStr() {
+    var d = new Date();
+    var m = d.getMonth() + 1;
+    var day = d.getDate();
+    return d.getFullYear() + '-' + (m < 10 ? '0' : '') + m + '-' + (day < 10 ? '0' : '') + day;
+  }
+
+  function defaultDisplayDate(dates) {
+    var today = todayStr();
+    if (dates.indexOf(today) >= 0) return today;
+    for (var i = 0; i < dates.length; i++) {
+      if (dates[i] <= today) return dates[i];
+    }
+    return dates[0] || today;
+  }
+
   function init() {
     fetch('/api/dates')
       .then(function (res) { return res.json(); })
@@ -178,7 +194,8 @@
         state.availableDates = dates;
         var params = new URLSearchParams(window.location.search);
         var dateParam = params.get('date');
-        populateDatePicker(dates, dateParam || dates[0]);
+        var defaultDate = defaultDisplayDate(dates);
+        populateDatePicker(dates, dateParam || defaultDate);
         loadDaily(dateParam || null);
       })
       .catch(function () {

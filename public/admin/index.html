@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>冰块 AI 日报 · 管理后台</title>
+  <link rel="stylesheet" href="/admin/static/css/admin.css">
+</head>
+<body>
+
+<!-- 登录页 -->
+<div id="login-page" class="login-page">
+  <div class="login-card">
+    <h1>🧊 冰块 AI 日报</h1>
+    <p class="subtitle">内容管理后台</p>
+    <form id="login-form">
+      <div class="form-group">
+        <label for="username">用户名</label>
+        <input type="text" id="username" name="username" value="admin" autocomplete="username" required>
+      </div>
+      <div class="form-group">
+        <label for="password">密码</label>
+        <input type="password" id="password" name="password" placeholder="请输入密码" autocomplete="current-password" required>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">登 录</button>
+    </form>
+    <p class="form-hint" style="text-align:center;margin-top:1rem;">
+      首次登录密码见服务器 config/admin.json，登录后请及时修改
+    </p>
+  </div>
+</div>
+
+<!-- 管理页 -->
+<div id="admin-page" class="hidden">
+  <header class="admin-header">
+    <h1>🧊 日报内容管理</h1>
+    <div class="actions">
+      <a class="btn btn-outline btn-sm" href="/" target="_blank">预览前台</a>
+      <button class="btn btn-outline btn-sm" id="btn-logout">退出</button>
+    </div>
+  </header>
+
+  <div class="admin-body">
+    <details class="help-panel" open>
+      <summary>📋 填写说明（不需要写 JSON，按表单填写即可）</summary>
+      <ul>
+        <li><strong>新闻标题</strong>：一句话概括，建议 20～40 字</li>
+        <li><strong>新闻正文</strong>：完整报道内容，直接粘贴纯文字即可</li>
+        <li><strong>来源链接</strong>：点击「添加来源」填写来源名称和网址，可添加多条</li>
+        <li><strong>解读内容</strong>：AI 科技填「深度解读」，教育填「教育观察」，文化填「文化观察」</li>
+        <li>每天三个板块（AI 科技 / AI+教育 / AI+文化）分别添加新闻，填完点「发布」即可上线</li>
+        <li><strong>前台默认显示当天日报</strong>：发布今日内容会更新首页；补发历史日期只存档，不会改变首页展示</li>
+        <li>如果从扣子生成了 HTML 文件，可用「导入 HTML」一键解析</li>
+      </ul>
+    </details>
+
+    <div class="toolbar">
+      <div class="form-group">
+        <label for="edit-date">编辑日期</label>
+        <input type="date" id="edit-date">
+      </div>
+      <button class="btn btn-outline" id="btn-load">加载</button>
+      <button class="btn btn-outline" id="btn-new">新建空白日报</button>
+      <button class="btn btn-outline" id="btn-copy">从昨日复制</button>
+      <button class="btn btn-outline" id="btn-import">导入 HTML</button>
+    </div>
+
+    <div class="admin-tabs" id="section-tabs">
+      <button class="admin-tab active" data-section="tech">🌐 AI 科技 <span class="count" id="count-tech">0</span></button>
+      <button class="admin-tab" data-section="edu">📖 AI+教育 <span class="count" id="count-edu">0</span></button>
+      <button class="admin-tab" data-section="culture">✒️ AI+文化 <span class="count" id="count-culture">0</span></button>
+    </div>
+
+    <div id="news-list"></div>
+
+    <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:0.5rem;">
+      <button class="btn btn-outline" id="btn-add-news">+ 添加一条新闻</button>
+    </div>
+
+    <div style="margin-top:1.5rem;display:flex;gap:0.75rem;flex-wrap:wrap;">
+      <button class="btn btn-success" id="btn-publish" style="padding:0.75rem 2rem;font-size:0.9375rem;">
+        🚀 发布上线
+      </button>
+      <button class="btn btn-outline" id="btn-save-draft">保存草稿</button>
+    </div>
+  </div>
+</div>
+
+<!-- HTML 导入弹窗 -->
+<div id="import-modal" class="modal-overlay hidden">
+  <div class="modal">
+    <h2>从 HTML 导入</h2>
+    <p class="form-hint" style="margin-bottom:0.75rem;">
+      将扣子生成的 HTML 文件内容粘贴到下方，或上传 .html 文件
+    </p>
+    <div class="form-group">
+      <input type="file" id="html-file" accept=".html,.htm">
+    </div>
+    <div class="form-group">
+      <textarea id="html-content" rows="12" placeholder="粘贴 HTML 内容..."></textarea>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-outline" id="btn-import-cancel">取消</button>
+      <button class="btn btn-primary" id="btn-import-confirm">解析导入</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script src="/admin/static/js/admin.js?v=5"></script>
+</body>
+</html>

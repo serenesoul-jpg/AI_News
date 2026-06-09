@@ -1,0 +1,40 @@
+{
+  "date": "2026-06-08",
+  "date_display": "2026 年 6 月 8 日 · 星期一",
+  "meta": {
+    "title": "冰块AI资讯日报 | 2026-06-08",
+    "og_title": "冰块AI资讯日报 · 6月8日",
+    "og_description": "AI科技 × AI+教育 × AI+文化，三大板块一键切换",
+    "og_image": "https://www.coze.cn/s/A10awpVKceE/"
+  },
+  "sections": {
+    "tech": {
+      "label": "AI 科技",
+      "icon": "🌐",
+      "intro": "前沿动态与深度解读",
+      "comment_label": "深度解读",
+      "items": [
+        {
+          "title": "demo",
+          "body": "",
+          "sources": [],
+          "comment": ""
+        }
+      ]
+    },
+    "edu": {
+      "label": "AI + 教育",
+      "icon": "📖",
+      "intro": "AI 教育与青年成长",
+      "comment_label": "教育观察",
+      "items": []
+    },
+    "culture": {
+      "label": "AI + 文化",
+      "icon": "✒️",
+      "intro": "AI 重塑文化发展",
+      "comment_label": "文化观察",
+      "items": []
+    }
+  }
+}
