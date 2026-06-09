@@ -1,0 +1,14 @@
+[Unit]
+Description=冰块 AI 资讯日报 Web 服务
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/root/AI_News
+ExecStart=/usr/bin/python3 /root/AI_News/server.py
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
